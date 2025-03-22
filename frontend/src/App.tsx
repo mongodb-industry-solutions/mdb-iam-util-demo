@@ -1,0 +1,107 @@
+import React, { useState } from 'react';
+import { Search } from 'lucide-react';
+import { ConnectionStringInput } from './components/ConnectionStringInput';
+import { PermissionList } from './components/PermissionList';
+import { AnalysisResults } from './components/AnalysisResults';
+import { PermissionAnalysisService } from './services/api';
+import { AnalysisResponse } from './types';
+
+/**
+ * Main application component for permission analysis
+ */
+function App() {
+  const [connectionString, setConnectionString] = useState('');
+  const [currentPermission, setCurrentPermission] = useState('');
+  const [permissionList, setPermissionList] = useState<string[]>([]);
+  const [results, setResults] = useState<AnalysisResponse | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleAddPermission = (permission: string) => {
+    setPermissionList([...permissionList, permission]);
+    setCurrentPermission('');
+    setError(null); // Clear error when adding permissions
+  };
+
+  const handleRemovePermission = (index: number) => {
+    setPermissionList(permissionList.filter((_, i) => i !== index));
+  };
+
+  const handleAnalyze = async () => {
+    // Validate permission list
+    if (permissionList.length === 0) {
+      setError('Please add at least one permission to analyze');
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      setError(null);
+      setResults(null);
+      
+      const service = PermissionAnalysisService.getInstance();
+      const response = await service.analyzePermissions({
+        connection_string: connectionString,
+        profile_actions: permissionList
+      });
+      
+      setResults(response);
+    } catch (error) {
+      console.error('Analysis failed:', error);
+      setError(error instanceof Error ? error.message : 'An unexpected error occurred');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 p-6">
+      <div className="max-w-4xl mx-auto space-y-6">
+        <h1 className="text-3xl font-bold text-gray-800 text-center mb-8">
+          Permission Analyzer
+        </h1>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <ConnectionStringInput
+            value={connectionString}
+            onChange={setConnectionString}
+          />
+          <PermissionList
+            permissions={permissionList}
+            currentPermission={currentPermission}
+            onPermissionChange={setCurrentPermission}
+            onPermissionAdd={handleAddPermission}
+            onPermissionRemove={handleRemovePermission}
+            error={permissionList.length === 0 ? 'At least one permission is required' : undefined}
+          />
+        </div>
+
+        <div className="flex flex-col items-center gap-4">
+          <button
+            onClick={handleAnalyze}
+            disabled={isLoading || permissionList.length === 0}
+            className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-colors ${
+              isLoading || permissionList.length === 0
+                ? 'bg-gray-400 cursor-not-allowed'
+                : 'bg-blue-600 hover:bg-blue-700 text-white'
+            }`}
+          >
+            <Search size={20} />
+            {isLoading ? 'Analyzing...' : 'Analyze Permissions'}
+          </button>
+
+          {error && (
+            <div className="w-full bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+              <strong className="font-bold">Error: </strong>
+              <span className="block sm:inline">{error}</span>
+            </div>
+          )}
+        </div>
+
+        {results && <AnalysisResults results={results} />}
+      </div>
+    </div>
+  );
+}
+
+export default App;
