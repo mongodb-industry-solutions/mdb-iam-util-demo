@@ -23,3 +23,36 @@ export interface StatusConfig {
   message: string;
   className: string;
 }
+
+
+/**
+ * Represents the request body for the rectify API.
+ */
+export interface RectifyRequest {
+  /**
+   * The MongoDB connection string.
+   */
+  connection: string;
+  /**
+   * An array of permissions to rectify.
+   */
+  permissions: string[];
+}
+
+/**
+* Represents the response from the rectify API.
+*/
+export interface RectifyResponse {
+  /**
+   * An array of extra permissions.
+   */
+  extra: string[];
+  /**
+   * An array of missing permissions.
+   */
+  missing: string[];
+  /**
+   * An array of present permissions.
+   */
+  present: string[];
+}

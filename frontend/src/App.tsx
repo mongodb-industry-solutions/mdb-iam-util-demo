@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Search } from 'lucide-react';
+import { useState } from 'react';
+import { Search, Circle, RefreshCcw } from 'lucide-react';
 import { ConnectionStringInput } from './components/ConnectionStringInput';
 import { PermissionList } from './components/PermissionList';
 import { AnalysisResults } from './components/AnalysisResults';
-import { PermissionAnalysisService } from './services/api';
-import { AnalysisResponse } from './types';
+import { AnalysisResponse, RectifyRequest } from './types';
+import { IAMService } from './services/iam.service';
 
 /**
  * Main application component for permission analysis
@@ -27,6 +27,14 @@ function App() {
     setPermissionList(permissionList.filter((_, i) => i !== index));
   };
 
+  const handleReser = async () => {
+    setConnectionString('');
+    setCurrentPermission('');
+    setPermissionList([]);
+    setError(null);
+    setResults(null);
+  }
+
   const handleAnalyze = async () => {
     // Validate permission list
     if (permissionList.length === 0) {
@@ -38,14 +46,16 @@ function App() {
       setIsLoading(true);
       setError(null);
       setResults(null);
-      
-      const service = PermissionAnalysisService.getInstance();
-      const response = await service.analyzePermissions({
-        connection_string: connectionString,
-        profile_actions: permissionList
-      });
-      
-      setResults(response);
+
+      const request: RectifyRequest = {
+        connection: connectionString,
+        permissions: permissionList,
+      };
+
+      const iamService = IAMService.getInstance();
+      const { extra, missing, present } = await iamService.rectify(request);
+
+      setResults({ extra, missing, valid: present, status: !present?.length ? "none" : (present?.length === permissionList.length ? "full" : "partial") });
     } catch (error) {
       console.error('Analysis failed:', error);
       setError(error instanceof Error ? error.message : 'An unexpected error occurred');
@@ -77,18 +87,29 @@ function App() {
         </div>
 
         <div className="flex flex-col items-center gap-4">
-          <button
-            onClick={handleAnalyze}
-            disabled={isLoading || permissionList.length === 0}
-            className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-colors ${
-              isLoading || permissionList.length === 0
+
+          <div className='flex flex-row items-center gap-4'>
+            <button
+              onClick={handleAnalyze}
+              disabled={isLoading || permissionList.length === 0}
+              className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-colors ${isLoading || permissionList.length === 0
                 ? 'bg-gray-400 cursor-not-allowed'
                 : 'bg-blue-600 hover:bg-blue-700 text-white'
-            }`}
-          >
-            <Search size={20} />
-            {isLoading ? 'Analyzing...' : 'Analyze Permissions'}
-          </button>
+                }`}
+            >
+              <Search size={20} />
+              {isLoading ? 'Analyzing...' : 'Analyze Permissions'}
+            </button>
+
+            <button
+              onClick={handleReser}
+              disabled={isLoading}
+              className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-colors bg-blue-600 hover:bg-blue-700 text-white`}
+            >
+              <RefreshCcw size={20} />
+              {isLoading ? 'Analyzing...' : 'Reset'}
+            </button>
+          </div>
 
           {error && (
             <div className="w-full bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
