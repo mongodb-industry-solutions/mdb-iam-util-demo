@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Search } from 'lucide-react';
 import { ConnectionStringInput } from './components/ConnectionStringInput';
 import { PermissionList } from './components/PermissionList';
 import { AnalysisResults } from './components/AnalysisResults';
-import { PermissionAnalysisService } from './services/api';
-import { AnalysisResponse } from './types';
+import { AnalysisResponse, RectifyRequest, RectifyResponse } from './types';
+import { IAMService } from './services/iam.service';
 
 /**
  * Main application component for permission analysis
@@ -38,14 +38,16 @@ function App() {
       setIsLoading(true);
       setError(null);
       setResults(null);
-      
-      const service = PermissionAnalysisService.getInstance();
-      const response = await service.analyzePermissions({
-        connection_string: connectionString,
-        profile_actions: permissionList
-      });
-      
-      setResults(response);
+
+      const request: RectifyRequest = {
+        connection: connectionString,
+        permissions: permissionList,
+      };
+
+      const iamService = IAMService.getInstance();
+      const { extra, missing, present } = await iamService.rectify(request);
+
+      setResults({ extra, missing, valid: present, status: !present?.length ? "none" : (present?.length === permissionList.length ? "full" : "partial") });
     } catch (error) {
       console.error('Analysis failed:', error);
       setError(error instanceof Error ? error.message : 'An unexpected error occurred');
@@ -80,11 +82,10 @@ function App() {
           <button
             onClick={handleAnalyze}
             disabled={isLoading || permissionList.length === 0}
-            className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-colors ${
-              isLoading || permissionList.length === 0
-                ? 'bg-gray-400 cursor-not-allowed'
-                : 'bg-blue-600 hover:bg-blue-700 text-white'
-            }`}
+            className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-colors ${isLoading || permissionList.length === 0
+              ? 'bg-gray-400 cursor-not-allowed'
+              : 'bg-blue-600 hover:bg-blue-700 text-white'
+              }`}
           >
             <Search size={20} />
             {isLoading ? 'Analyzing...' : 'Analyze Permissions'}
