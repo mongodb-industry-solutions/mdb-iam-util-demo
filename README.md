@@ -41,7 +41,7 @@ MDB-IAM-UTIL-DEMO/
 The application provides a **permission validation tool** for MongoDB profiles. Users input:
 1. **Connection String** – A text field where the user provides a MongoDB connection string, e.g.:
    ```
-   mongodb+srv://tony:passwordone@solutionsassurance.n0kts.mongodb.net/?retryWrites=true&w=majority&appName=MyLocalApp
+   mongodb+srv://tony:password@solutionsassurance.n0kts.mongodb.net/?retryWrites=true&w=majority&appName=MyLocalApp
    ```
 2. **Profile Permission List** – A list of expected permissions for a MongoDB custom profile, e.g.:
    ```json
@@ -73,19 +73,26 @@ Ensuring a **Full Match** is crucial for **secure and stable** MongoDB integrati
 The application calls an API service with:
   ```json
   {
-    "connection_string": "sdsdsdsdsd/read-all",
-    "profile_actions": ["read", "write", "all"]
+        "connection":"mongodb+srv://tony:password@solutionsassurance.n0kts.mongodb.net/?retryWrites=true&w=majority&appName=MyLocalApp",
+        "permissions": ["search", "read", "find", "update", "remove", "collMod"]
   }
   ```
 The API responds with:
-  ```json
-  {
-    "missing": ["write"],
-    "extra": ["all"],
-    "valid": ["read"],
-    "status": "partial"
-  }
-  ```
+
+    ```json
+    {
+        "extra": [],
+        "missing": [
+            "search",
+            "read",
+            "find",
+            "update",
+            "remove",
+            "collMod"
+        ],
+        "present": []
+    }
+    ```
 This allows users to assess and correct IAM configurations efficiently.
 
 ## 🛠️ Tech Stack
@@ -109,10 +116,8 @@ All components are **fully documented using JSDoc**, ensuring easy comprehension
 ## 🏆 Conclusion
 This demo is a stepping stone for teams integrating MongoDB with **strong IAM practices**. By following this reference, teams can enhance their security posture, optimize their implementations, and ensure compliance with best security practices.
 
-🚀 **Next Steps:** Expand this demo to support **Python, Java, .NET, and Go**, making IAM utilities more accessible across platforms.
+🚀 **Next Steps:** Expand this demo to support **Python, Java, .NET, and Go**, making IAM utilities more accessible across platforms.s
 
-
-## Plugins  
-- [MongoDB IAM Utilities for Node.Js](https://github.com/mongodb-industry-solutions/mdb-iam-util-node)
-    - [NPM Link](https://www.npmjs.com/package/@mongodb-solution-assurance/iam-util)
+## 📌 Plugins  
+- [MongoDB IAM Utilities for Node.Js](https://github.com/mongodb-industry-solutions/mdb-iam-util-node), get more details also from it [NPM package link](https://www.npmjs.com/package/@mongodb-solution-assurance/iam-util)
 - [MongoDB IAM Utilities for Python](https://github.com/mongodb-industry-solutions/mdb-iam-util-python)
