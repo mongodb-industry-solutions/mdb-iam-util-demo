@@ -3,13 +3,23 @@
 ## 📌 Overview
 This demo application showcases the integration and practical use of the `@mongodb-solution-assurance/iam-util` package. It aims to enhance the developer experience by providing streamlined utilities for Identity and Access Management (IAM) processes in MongoDB integrations. The primary focus of this demo is **IAM Rectification**, a critical security measure ensuring proper role-based access control.
 
-By using this reference implementation, development teams can adopt best practices to enhance the security and quality of their MongoDB-based solutions. The demo serves as a **guiding example** to encourage developers to evolve their products with a focus on **security, maintainability, and performance**.
-
 ## 🎯 Objectives
 - Demonstrate how to use MongoDB IAM utility libraries for **rectification processes**.
 - Highlight the importance of **IAM security** in MongoDB integrations.
 - Serve as a **reference for development teams** to improve their implementations.
 - Promote the adoption of `@mongodb-solution-assurance/iam-util` across multiple platforms.
+
+### 🔑 Importance of IAM Rectification & SCRAM Authentication
+IAM Rectification plays a vital role in ensuring that user accounts and permissions remain properly configured, reducing security risks such as unauthorized access or privilege escalation. This demo primarily applies to MongoDB integrations utilizing **SCRAM (Salted Challenge Response Authentication Mechanism)** authentication, which is a widely used and secure authentication method in MongoDB.
+
+However, SCRAM authentication alone is not sufficient to guarantee optimal security. It is recommended to consider alternative, more robust authentication mechanisms such as:
+- **LDAP (Lightweight Directory Access Protocol)** – Centralized authentication for enterprise environments.
+- **X.509 Certificates** – Public-key-based authentication for enhanced security.
+- **Kerberos Authentication** – Secure network authentication for large-scale environments.
+
+For teams using SCRAM authentication, implementing **IAM Rectification** as demonstrated in this demo ensures that users have the correct permissions and do not pose a security risk. While this demo presents a user interface for illustrative purposes, in real-world integrations, this process can be executed in the background. The system can then **alert users** when a connection string lacks a Full Match or, in critical cases, prevent further configuration to enforce security policies.
+
+By using this reference implementation, development teams can adopt best practices to enhance the security and quality of their MongoDB-based solutions. The demo serves as a **guiding example** to encourage developers to evolve their products with a focus on **security, maintainability, and performance**.
 
 ## 🏗️ Project Structure
 The demo consists of a backend service and a frontend application:
@@ -41,7 +51,7 @@ MDB-IAM-UTIL-DEMO/
 The application provides a **permission validation tool** for MongoDB profiles. Users input:
 1. **Connection String** – A text field where the user provides a MongoDB connection string, e.g.:
    ```
-   mongodb+srv://tony:passwordone@solutionsassurance.n0kts.mongodb.net/?retryWrites=true&w=majority&appName=MyLocalApp
+   mongodb+srv://tony:*********@solutionsassurance.n0kts.mongodb.net/?retryWrites=true&w=majority&appName=MyLocalApp
    ```
 2. **Profile Permission List** – A list of expected permissions for a MongoDB custom profile, e.g.:
    ```json
@@ -73,19 +83,26 @@ Ensuring a **Full Match** is crucial for **secure and stable** MongoDB integrati
 The application calls an API service with:
   ```json
   {
-    "connection_string": "sdsdsdsdsd/read-all",
-    "profile_actions": ["read", "write", "all"]
+        "connection":"mongodb+srv://tony:*********@solutionsassurance.n0kts.mongodb.net/?retryWrites=true&w=majority&appName=MyLocalApp",
+        "permissions": ["search", "read", "find", "update", "remove", "collMod"]
   }
   ```
 The API responds with:
-  ```json
-  {
-    "missing": ["write"],
-    "extra": ["all"],
-    "valid": ["read"],
-    "status": "partial"
-  }
-  ```
+
+    ```json
+    {
+        "extra": [],
+        "missing": [
+            "search",
+            "read",
+            "find",
+            "update",
+            "remove",
+            "collMod"
+        ],
+        "present": []
+    }
+    ```
 This allows users to assess and correct IAM configurations efficiently.
 
 ## 🛠️ Tech Stack
@@ -111,8 +128,6 @@ This demo is a stepping stone for teams integrating MongoDB with **strong IAM pr
 
 🚀 **Next Steps:** Expand this demo to support **Python, Java, .NET, and Go**, making IAM utilities more accessible across platforms.
 
-
-## Plugins  
-- [MongoDB IAM Utilities for Node.Js](https://github.com/mongodb-industry-solutions/mdb-iam-util-node)
-    - [NPM Link](https://www.npmjs.com/package/@mongodb-solution-assurance/iam-util)
+## 📌 Plugins  
+- [MongoDB IAM Utilities for Node.Js](https://github.com/mongodb-industry-solutions/mdb-iam-util-node), get more details also from it [NPM package link](https://www.npmjs.com/package/@mongodb-solution-assurance/iam-util)
 - [MongoDB IAM Utilities for Python](https://github.com/mongodb-industry-solutions/mdb-iam-util-python)
