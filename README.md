@@ -58,7 +58,7 @@ The application provides a **permission validation tool** for MongoDB profiles. 
 
 1. **Connection String** – A text field where the user provides a MongoDB connection string, e.g.:
    ```
-   mongodb+srv://tony:*********@solutionsassurance.n0kts.mongodb.net/?retryWrites=true&w=majority&appName=MyLocalApp
+   mongodb+srv://tony:passwordone@solutionsassurance.n0kts.mongodb.net/?retryWrites=true&w=majority&appName=MyLocalApp
    ```
 2. **Profile Permission List** – A list of expected permissions for a MongoDB custom profile, e.g.:
    ```json
@@ -68,9 +68,20 @@ The application provides a **permission validation tool** for MongoDB profiles. 
 
 ### 🔄 Process Flow
 
+🔹 **Role Creation & Permission Best Practices**
+
+For each integration, **custom roles must be created** to ensure minimal required permissions. Each role should:
+
+- Specify **only** the required actions for the integration.
+- Define **specific databases** where these permissions apply.
+- **Include** the special permission `read@admin` to allow permission verification.
+
+Without `read@admin`, the IAM Rectification process will fail, and the system will not return data. It is critical to be meticulous when defining roles to avoid excessive privileges or missing essential ones. Below is an example of a custom role with a specific set of permissions for the database called `security`
+
+![](./frontend/rsc/screenshot-roles.jpg)
 
 
-The system evaluates the specified **Connection String** and **Profile Permission List**, then categorizes results into three columns:
+🔹 Once the specific permissions for an integration have been defined, including the additional permissions for the role rectification process, the system proceeds to evaluate the specified **Connection String** and **Profile Permission List**, then categorizes results into three columns:
   1. ✅ **Valid Permissions** – Found in the connection string and match the required ones.
   2. ❌ **Missing Permissions** – Required permissions that are absent.
   3. ⚠️ **Extra Permissions** – Permissions that exist but should not be present.
