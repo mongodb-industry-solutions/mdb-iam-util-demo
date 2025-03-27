@@ -68,7 +68,9 @@ The application provides a **permission validation tool** for MongoDB profiles. 
 
 ### 🔄 Process Flow
 
-- The system evaluates the specified **Connection String** and **Profile Permission List**, then categorizes results into three columns:
+
+
+The system evaluates the specified **Connection String** and **Profile Permission List**, then categorizes results into three columns:
   1. ✅ **Valid Permissions** – Found in the connection string and match the required ones.
   2. ❌ **Missing Permissions** – Required permissions that are absent.
   3. ⚠️ **Extra Permissions** – Permissions that exist but should not be present.
@@ -80,6 +82,7 @@ The application provides a **permission validation tool** for MongoDB profiles. 
 - 🟠 **Partial Match** – Some permissions are missing or extra ones exist.
     ![](./frontend/rsc/screenshot-warning.jpg)
 - 🟢 **Full Match** – All required permissions are present, and no additional permissions exist.
+    ![](./frontend/rsc/screenshot-success.jpg)
 
 ### 🔐 Security Best Practices
 
