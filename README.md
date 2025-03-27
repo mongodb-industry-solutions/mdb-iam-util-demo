@@ -58,7 +58,7 @@ The application provides a **permission validation tool** for MongoDB profiles. 
 
 1. **Connection String** – A text field where the user provides a MongoDB connection string, e.g.:
    ```
-   mongodb+srv://tony:passwordone@solutionsassurance.n0kts.mongodb.net/?retryWrites=true&w=majority&appName=MyLocalApp
+   mongodb+srv://tony:*********@solutionsassurance.n0kts.mongodb.net/?retryWrites=true&w=majority&appName=MyLocalApp
    ```
 2. **Profile Permission List** – A list of expected permissions for a MongoDB custom profile, e.g.:
    ```json
@@ -139,7 +139,12 @@ This allows users to assess and correct IAM configurations efficiently.
 - Additional plugins for Python, Java, .NET, and Go (Coming Soon)
 
 ## ⚙️ Installation & Local Setup
+Using Docker and Docker Compose:
+```sh
+docker-compose up
+```
 
+Using Local environment with NPM and Node.js:
 1. **Backend Setup**
     ```sh
     cd backend-node
