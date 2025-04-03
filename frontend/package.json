@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "docker:build": "docker-compose up --build",
+    "docker:clean": "docker-compose down -v --rmi all --remove-orphans"
   },
   "dependencies": {
     "axios": "^1.6.7",

@@ -6,9 +6,10 @@ WORKDIR /app
 
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
+COPY tsconfig.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm ci --omit=dev
 
 # Copy the rest of the application code to the working directory
 COPY . .
@@ -17,4 +18,4 @@ COPY . .
 EXPOSE 3000
 
 # Command to run the application
-CMD [ "npm", "run", "dev" ]
+CMD ["npm", "run", "dev"]
