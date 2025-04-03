@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, Circle, RefreshCcw } from 'lucide-react';
+import { Search, RefreshCcw } from 'lucide-react';
 import { ConnectionStringInput } from './components/ConnectionStringInput';
 import { PermissionList } from './components/PermissionList';
 import { AnalysisResults } from './components/AnalysisResults';
