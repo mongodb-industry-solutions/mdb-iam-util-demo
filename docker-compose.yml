@@ -21,7 +21,10 @@ services:
       dockerfile: Dockerfile
     ports:
       - "5173:5173"
+    environment:
+      - VITE_API_BASE_URL=http://backend:3001/api/node/iam
     volumes:
       - ./frontend/src:/app/src
-    command: >
-        sh -c "rm -rf node_modules package-lock.json && npm install --legacy-peer-deps && npm run dev"
+    command: npm run dev
+    # command: >
+    #     sh -c "rm -rf node_modules package-lock.json && npm install --legacy-peer-deps && npm run dev"

@@ -1,0 +1,24 @@
+{
+  "name": "mdb-iam-util-demo",
+  "version": "1.0.0",
+  "description": "This demo application showcases the integration and practical use of the `@mongodb-solution-assurance/iam-util` package. It aims to enhance the developer experience by providing streamlined utilities for Identity and Access Management (IAM) processes in MongoDB integrations. The primary focus of this demo is **IAM Rectification**, a critical security measure ensuring proper role-based access control.",
+  "main": "index.js",
+  "scripts": {
+    "docker:build": "docker-compose up --build",
+    "docker:clean": "docker-compose down -v --rmi all --remove-orphans",
+    "docker:connect:frontend": "docker exec -it mdb-iam-util-demo-frontend-1 sh",
+    "docker:connect:backend": "docker exec -it mdb-iam-util-demo-backend-1 sh",
+    "docker:info": "docker ps"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mongodb-industry-solutions/mdb-iam-util-demo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mongodb-industry-solutions/mdb-iam-util-demo/issues"
+  },
+  "homepage": "https://github.com/mongodb-industry-solutions/mdb-iam-util-demo#readme"
+}
