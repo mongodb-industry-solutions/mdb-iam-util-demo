@@ -134,9 +134,9 @@ The API responds with:
 This allows users to assess and correct IAM configurations efficiently.
 
 ## 🔗 Available Plugins
-- [MongoDB IAM Utilities for Node.Js](https://github.com/mongodb-industry-solutions/mdb-iam-util-node), get more details also from it [NPM package link](https://www.npmjs.com/package/@mongodb-solution-assurance/iam-util)
-- [MongoDB IAM Utilities for Python](https://github.com/mongodb-industry-solutions/mdb-iam-util-python)
-- Additional plugins for Python, Java, .NET, and Go (Coming Soon)
+- [MongoDB IAM Utilities for Node.Js](https://github.com/mongodb-industry-solutions/mdb-iam-util-node), get more details also at [NPM package link](https://www.npmjs.com/package/@mongodb-solution-assurance/iam-util)
+- [MongoDB IAM Utilities for Python](https://github.com/mongodb-industry-solutions/mdb-iam-util-python), get more details also at [PYPI package link](https://pypi.org/project/mongodb-solution-assurance-iam-util)
+- Additional plugins for Java, .NET, and Go (Coming Soon)
 
 ## ⚙️ Installation & Local Setup
 Using Docker and Docker Compose:
