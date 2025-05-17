@@ -4,6 +4,8 @@
 
 This demo application showcases the integration and practical use of the `@mongodb-solution-assurance/iam-util` package. It aims to enhance the developer experience by providing streamlined utilities for Identity and Access Management (IAM) processes in MongoDB integrations. The primary focus of this demo is **IAM Rectification**, a critical security measure ensuring proper role-based access control.
 
+[![Ask DeepWiki for further understanding.](https://deepwiki.com/badge.svg)](https://deepwiki.com/mongodb-industry-solutions/mdb-iam-util-demo)
+
 ## 🎯 Objectives
 
 - Demonstrate how to use MongoDB IAM utility libraries for **rectification processes**.
@@ -164,4 +166,4 @@ Using Local environment with NPM and Node.js:
 
 This demo is a stepping stone for teams integrating MongoDB with **strong IAM practices**. By following this reference, teams can enhance their security posture, optimize their implementations, and ensure compliance with best security practices.
 
-🚀 **Next Steps:** Expand this demo to support **Python, Java, .NET, and Go**, making IAM utilities more accessible across platforms.
+🚀 **Next Steps:** Expand this demo to support **Java, .NET, and Go**, making IAM utilities more accessible across platforms.
