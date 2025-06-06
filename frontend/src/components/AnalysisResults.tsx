@@ -73,7 +73,7 @@ export const AnalysisResults: React.FC<AnalysisResultsProps> = ({ results }) => 
       {/* Valid Permissions */}
       <div className="bg-white rounded-lg shadow-md p-4">
         <h2 className="text-lg font-semibold text-green-600 mb-3">
-          Valid Permissions
+          Existing Permissions
         </h2>
         <ul className="space-y-2">
           {results.valid.map((permission, index) => (
