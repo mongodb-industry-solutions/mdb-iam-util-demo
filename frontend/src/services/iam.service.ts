@@ -20,7 +20,7 @@ export class IAMService {
      *
      * @param baseUrl - The base URL of the IAM REST API.
      */
-    constructor(baseUrl: string = 'http://localhost:3001/api/node/iam') {
+    constructor(baseUrl: string = 'http://localhost:3001/api/node/scram') {
         this.baseUrl = baseUrl;
     }
 

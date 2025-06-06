@@ -3,7 +3,8 @@ dotenv.config();
 
 import cors from 'cors';
 import express, { NextFunction, Request, Response } from "express";
-import routeIam from "./routes/iam"
+import routeScram from "./routes/scram"
+import routeX509 from "./routes/x509"
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -30,7 +31,8 @@ app.get("/", (request: Request, response: Response) => {
 });
 
 // Add the routes 
-app.use("/api/node/iam", routeIam);
+app.use("/api/node/scram", routeScram);
+app.use("/api/node/x509", routeX509);
 
 // Start the server 
 app

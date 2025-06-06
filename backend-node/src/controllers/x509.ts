@@ -1,21 +1,20 @@
-import { IAMService } from "../services/iam";
+import { X509Service } from "../services/x509";
 import { Request, Response } from "express";
 
-export class IAMController {
+export class X509Controller {
 
-    private srv: IAMService;
+    private srv: X509Service;
 
     constructor() {
-        this.srv = new IAMService();
+        this.srv = new X509Service();
     }
 
     async rectify(req: Request, res: Response): Promise<void> {
         try {
-            let username = req.body?.username || process.env.DB_USERNAME;
-            let password = req.body?.password || process.env.DB_PASSWORD;
-            let host = req.body?.host || process.env.DB_HOST || "solutionsassurance.n0kts.mongodb.net";
-            let app = req.body?.app || process.env.DB_APP || "MyLocalApp";
-            let connection = req.body?.connection || `mongodb+srv://${username}:${password}@${host}/?retryWrites=true&w=majority&appName=${app}`;
+            let key = req.body?.key || process.env.DB_KEY;
+            let cert = req.body?.cert || process.env.DB_CERT;
+            let ca = req.body?.ca || process.env.DB_CA;
+            let uri = req.body?.connection || req.body?.uri;
 
             let permissions = req.body?.permissions || [
                 "search",
@@ -27,7 +26,7 @@ export class IAMController {
                 "collMod",
             ];
 
-            let { extra, missing, present } = await this.srv.rectify({ connection, permissions });
+            let { extra, missing, present } = await this.srv.rectify({ uri, permissions });
 
             res.json({
                 // over-privileged

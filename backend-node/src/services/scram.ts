@@ -1,7 +1,7 @@
 import { MongoRoleManager } from "@mongodb-solution-assurance/iam-util";
 import { RectificationOption, RectificationResponse } from "../models/rectification";
 
-export class IAMService {
+export class SCRAMService {
 
     async rectify(options: RectificationOption): Promise<RectificationResponse> {
         // Collect options to carry out the rectification process
