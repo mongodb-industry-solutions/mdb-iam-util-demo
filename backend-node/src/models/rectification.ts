@@ -7,6 +7,16 @@ export interface RectificationOption {
     permissions: Array<string>;
 }
 
+export interface RectificationX509Option extends RectificationOption {
+    uri?: string;
+    key?: string;
+    cert?: string;
+    ca?: string;
+    certPath?: string;
+}
+
+
+
 export interface RectificationResponse {
     extra: string[];
     missing: string[];
