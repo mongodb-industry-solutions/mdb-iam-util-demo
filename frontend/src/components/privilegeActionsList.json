@@ -1,73 +1,49 @@
 {
-  "collectionActions": {
-    "queryWrite": [
+  "collectionActions": 
+    [
       "find",
       "insert",
       "remove",
       "update",
-      "bypassDocumentValidation"
-    ],
-    "databaseManagement": [
+      "bypassDocumentValidation",
       "createCollection",
       "createIndex",
       "dropCollection",
-      "killAnyCursor"
-    ],
-    "changeStreamActions": [
-      "changeStream"
-    ],
-    "serverAdministration": [
+      "killAnyCursor",
+      "changeStream",
       "collMod",
       "compact",
       "convertToCapped",
       "dropIndex",
-      "reIndex"
-    ],
-    "diagnosticActions": [
+      "reIndex",
       "collStats",
       "dbHash",
       "listIndexes",
-      "validate"
-    ],
-    "shardingActions": [
+      "validate",
       "moveChunk",
       "splitChunk",
       "analyzeShardKey",
       "refineCollectionShardKey",
       "clearJumboFlag",
       "reshardCollection"
-    ]
-  },
+    ],
 
-  "databaseLevel": {
-    "databaseManagement": [
-      "enableProfiler"
-    ],
-    "serverAdministration": [
+  "databaseLevel": [
+      "enableProfiler",
       "dropDatabase",
-      "renameCollectionSameDB"
-    ],
-    "diagnosticActions": [
+      "renameCollectionSameDB",
       "dbStats",
       "listCollections"
-    ]
-  },
+    ],
 
-  "globalActions": {
-    "queryWrite": [
+  "globalActions": [
       "useUUID",
       "killop",
-      "bypassDefaultMaxTimeMS"
-    ],
-    "serverAdministration": [
+      "bypassDefaultMaxTimeMS",
       "setUserWriteBlockMode",
-      "bypassWriteBlockingMode"
-    ],
-    "sessionActions": [
+      "bypassWriteBlockingMode",
       "listSessions",
-      "killAnySession"
-    ],
-    "diagnosticActions": [
+      "killAnySession",
       "connPoolStats",
       "getCmdLineOpts",
       "getLog",
@@ -83,8 +59,7 @@
       "serverStatus",
       "shardingState",
       "top"
-    ]
-  },
+    ],
 
   "atlasDataFederation": [
     "sqlGetSchema",
