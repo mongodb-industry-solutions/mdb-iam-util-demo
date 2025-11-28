@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Search, RefreshCcw } from 'lucide-react';
 import { ConnectionStringInput } from './components/ConnectionStringInput';
 import { PermissionList } from './components/PermissionList';
+import { PrivilegeSelector } from './components/PrivilegeSelector';
 import { AnalysisResults } from './components/AnalysisResults';
 import { AnalysisResponse, RectifyRequest } from './types';
 import { IAMService } from './services/iam.service';
@@ -25,6 +26,15 @@ function App() {
 
   const handleRemovePermission = (index: number) => {
     setPermissionList(permissionList.filter((_, i) => i !== index));
+  };
+
+  const handlePermissionToggle = (permission: string) => {
+    if (permissionList.includes(permission)) {
+      setPermissionList(permissionList.filter(p => p !== permission));
+    } else {
+      setPermissionList([...permissionList, permission]);
+    }
+    setError(null);
   };
 
   const handleReser = async () => {
@@ -66,24 +76,32 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 p-6">
-      <div className="max-w-4xl mx-auto space-y-6">
+      <div className="max-w-7xl mx-auto space-y-6">
         <h1 className="text-3xl font-bold text-gray-800 text-center mb-8">
           Permission Analyzer for SCRAM Authentication
         </h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <ConnectionStringInput
-            value={connectionString}
-            onChange={setConnectionString}
-          />
-          <PermissionList
-            permissions={permissionList}
-            currentPermission={currentPermission}
-            onPermissionChange={setCurrentPermission}
-            onPermissionAdd={handleAddPermission}
-            onPermissionRemove={handleRemovePermission}
-            error={permissionList.length === 0 ? 'At least one permission is required' : undefined}
-          />
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2">
+            <PrivilegeSelector
+              selectedPermissions={permissionList}
+              onPermissionToggle={handlePermissionToggle}
+            />
+          </div>
+          <div className="lg:col-span-1 space-y-6">
+            <ConnectionStringInput
+              value={connectionString}
+              onChange={setConnectionString}
+            />
+            <PermissionList
+              permissions={permissionList}
+              currentPermission={currentPermission}
+              onPermissionChange={setCurrentPermission}
+              onPermissionAdd={handleAddPermission}
+              onPermissionRemove={handleRemovePermission}
+              error={permissionList.length === 0 ? 'At least one permission is required' : undefined}
+            />
+          </div>
         </div>
 
         <div className="flex flex-col items-center gap-4">
