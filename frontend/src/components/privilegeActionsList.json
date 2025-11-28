@@ -1,0 +1,119 @@
+{
+  "collectionActions": {
+    "queryWrite": [
+      "find",
+      "insert",
+      "remove",
+      "update",
+      "bypassDocumentValidation"
+    ],
+    "databaseManagement": [
+      "createCollection",
+      "createIndex",
+      "dropCollection",
+      "killAnyCursor"
+    ],
+    "changeStreamActions": [
+      "changeStream"
+    ],
+    "serverAdministration": [
+      "collMod",
+      "compact",
+      "convertToCapped",
+      "dropIndex",
+      "reIndex"
+    ],
+    "diagnosticActions": [
+      "collStats",
+      "dbHash",
+      "listIndexes",
+      "validate"
+    ],
+    "shardingActions": [
+      "moveChunk",
+      "splitChunk",
+      "analyzeShardKey",
+      "refineCollectionShardKey",
+      "clearJumboFlag",
+      "reshardCollection"
+    ]
+  },
+
+  "databaseLevel": {
+    "databaseManagement": [
+      "enableProfiler"
+    ],
+    "serverAdministration": [
+      "dropDatabase",
+      "renameCollectionSameDB"
+    ],
+    "diagnosticActions": [
+      "dbStats",
+      "listCollections"
+    ]
+  },
+
+  "globalActions": {
+    "queryWrite": [
+      "useUUID",
+      "killop",
+      "bypassDefaultMaxTimeMS"
+    ],
+    "serverAdministration": [
+      "setUserWriteBlockMode",
+      "bypassWriteBlockingMode"
+    ],
+    "sessionActions": [
+      "listSessions",
+      "killAnySession"
+    ],
+    "diagnosticActions": [
+      "connPoolStats",
+      "getCmdLineOpts",
+      "getLog",
+      "getParameter",
+      "getShardMap",
+      "hostInfo",
+      "inprog",
+      "listDatabases",
+      "listShards",
+      "netstat",
+      "replSetGetConfig",
+      "replSetGetStatus",
+      "serverStatus",
+      "shardingState",
+      "top"
+    ]
+  },
+
+  "atlasDataFederation": [
+    "sqlGetSchema",
+    "sqlSetSchema",
+    "viewAllHistory",
+    "outToS3",
+    "outToAzure",
+    "outToGCS",
+    "storageGetConfig",
+    "storageSetConfig"
+  ],
+
+  "atlasSharding": [
+    "flushRouterConfig",
+    "enableSharding",
+    "checkMetadataConsistency",
+    "shardedDataDistribution"
+  ],
+
+  "atlasStreamsProcessing": [
+    "getStreamProcessor",
+    "createStreamProcessor",
+    "processStreamProcessor",
+    "startStreamProcessor",
+    "stopStreamProcessor",
+    "dropStreamProcessor",
+    "sampleStreamProcessor",
+    "listStreamProcessors",
+    "listStreamConnections",
+    "streamProcessorStats"
+  ]
+}
