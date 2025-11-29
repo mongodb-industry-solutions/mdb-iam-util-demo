@@ -1,0 +1,94 @@
+{
+  "collectionActions": 
+    [
+      "find",
+      "insert",
+      "remove",
+      "update",
+      "bypassDocumentValidation",
+      "createCollection",
+      "createIndex",
+      "dropCollection",
+      "killAnyCursor",
+      "changeStream",
+      "collMod",
+      "compact",
+      "convertToCapped",
+      "dropIndex",
+      "reIndex",
+      "collStats",
+      "dbHash",
+      "listIndexes",
+      "validate",
+      "moveChunk",
+      "splitChunk",
+      "analyzeShardKey",
+      "refineCollectionShardKey",
+      "clearJumboFlag",
+      "reshardCollection"
+    ],
+
+  "databaseLevel": [
+      "enableProfiler",
+      "dropDatabase",
+      "renameCollectionSameDB",
+      "dbStats",
+      "listCollections"
+    ],
+
+  "globalActions": [
+      "useUUID",
+      "killop",
+      "bypassDefaultMaxTimeMS",
+      "setUserWriteBlockMode",
+      "bypassWriteBlockingMode",
+      "listSessions",
+      "killAnySession",
+      "connPoolStats",
+      "getCmdLineOpts",
+      "getLog",
+      "getParameter",
+      "getShardMap",
+      "hostInfo",
+      "inprog",
+      "listDatabases",
+      "listShards",
+      "netstat",
+      "replSetGetConfig",
+      "replSetGetStatus",
+      "serverStatus",
+      "shardingState",
+      "top"
+    ],
+
+  "atlasDataFederation": [
+    "sqlGetSchema",
+    "sqlSetSchema",
+    "viewAllHistory",
+    "outToS3",
+    "outToAzure",
+    "outToGCS",
+    "storageGetConfig",
+    "storageSetConfig"
+  ],
+
+  "atlasSharding": [
+    "flushRouterConfig",
+    "enableSharding",
+    "checkMetadataConsistency",
+    "shardedDataDistribution"
+  ],
+
+  "atlasStreamsProcessing": [
+    "getStreamProcessor",
+    "createStreamProcessor",
+    "processStreamProcessor",
+    "startStreamProcessor",
+    "stopStreamProcessor",
+    "dropStreamProcessor",
+    "sampleStreamProcessor",
+    "listStreamProcessors",
+    "listStreamConnections",
+    "streamProcessorStats"
+  ]
+}
