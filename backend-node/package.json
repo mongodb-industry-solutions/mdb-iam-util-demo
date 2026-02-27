@@ -14,7 +14,7 @@
   "dependencies": {
     "@mongodb-solution-assurance/iam-util": "^1.0.3",
     "cors": "^2.8.5",
-    "express": "^5.0.1"
+    "express": "^5.2.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
